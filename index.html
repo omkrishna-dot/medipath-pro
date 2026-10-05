@@ -1,0 +1,1716 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MediPath Pro | Complete Pathology & Clinical Diagnostic Laboratory System</title>
+  <meta name="description" content="All-in-one digital pathology laboratory software for analyzing CBC (RBC, WBC, Platelets), Blood Pressure, Blood Sugar, Lipid Profile, Liver, and Kidney tests with instant clinical report generation.">
+  
+  <!-- Modern Typography from Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/jpeg" href="assets/logo.jpg">
+</head>
+<body>
+  <!-- Header / Navigation Bar -->
+  <header class="app-header no-print">
+    <div class="header-container">
+      <div class="brand-wrapper">
+        <img src="assets/logo.jpg" alt="MediPath Pro Logo" class="brand-logo" id="headerLogo">
+        <div class="brand-info">
+          <div class="brand-title-row">
+            <h1 class="brand-title" id="headerBrandTitle">MediPath <span>Pro</span></h1>
+            <span class="badge-accredited" id="headerAccreditedBadge">NABL / ISO 15189 CERTIFIED</span>
+          </div>
+          <p class="brand-tagline" id="headerBrandTagline">Advanced Pathology Diagnostic & Clinical Simulation System • पैथोलॉजी प्रयोगशाला प्रणाली</p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <!-- Quick Preset Case Dropdown -->
+        <div class="preset-selector">
+          <label for="casePresetSelect" class="preset-label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            Demo Cases (उदाहरण):
+          </label>
+          <select id="casePresetSelect" class="styled-select">
+            <option value="">-- Load Clinical Preset --</option>
+            <option value="healthy">🟢 Healthy Adult (सामान्य स्वस्थ व्यक्ति)</option>
+            <option value="dengue">🔴 Dengue / Severe Thrombocytopenia (कम प्लेटलेट्स)</option>
+            <option value="diabetic_htn">🟠 Type 2 Diabetes & Hypertension (शुगर + हाई बीपी)</option>
+            <option value="anemia">🟣 Microcytic Anemia (कम हीमोग्लोबिन / RBC)</option>
+            <option value="hepatorenal">🟤 Liver & Kidney Dysfunction (लिवर + किडनी रोग)</option>
+          </select>
+        </div>
+
+        <button id="openLabSettingsBtn" class="btn btn-outline" title="Change Laboratory Name & Details">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          Lab Details (लैब नाम)
+        </button>
+
+        <button id="themeToggleBtn" class="btn btn-icon" title="Toggle Light/Dark Theme" aria-label="Toggle theme">
+          <span class="theme-icon-dark">🌙</span>
+          <span class="theme-icon-light" style="display:none;">☀️</span>
+        </button>
+
+        <button id="quickReportBtn" class="btn btn-primary glow-button">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+          Print Lab Report (रिपोर्ट प्रिंट)
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Patient Demographic Bar -->
+  <section class="patient-bar no-print">
+    <div class="patient-bar-inner">
+      <div class="patient-field">
+        <label for="patientName">Patient Name (मरीज का नाम)</label>
+        <div class="input-with-icon">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          <input type="text" id="patientName" value="Rajesh Kumar Verma" placeholder="Enter patient name">
+        </div>
+      </div>
+
+      <div class="patient-field small">
+        <label for="patientAge">Age (आयु)</label>
+        <input type="number" id="patientAge" value="45" min="1" max="120">
+      </div>
+
+      <div class="patient-field small">
+        <label for="patientGender">Gender (लिंग)</label>
+        <select id="patientGender">
+          <option value="Male" selected>Male (पुरुष)</option>
+          <option value="Female">Female (महिला)</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div class="patient-field small">
+        <label for="patientBloodGroup">Blood Group</label>
+        <select id="patientBloodGroup">
+          <option value="B+" selected>B Positive (B+)</option>
+          <option value="O+">O Positive (O+)</option>
+          <option value="A+">A Positive (A+)</option>
+          <option value="AB+">AB Positive (AB+)</option>
+          <option value="O-">O Negative (O-)</option>
+          <option value="A-">A Negative (A-)</option>
+          <option value="B-">B Negative (B-)</option>
+          <option value="AB-">AB Negative (AB-)</option>
+        </select>
+      </div>
+
+      <div class="patient-field">
+        <label for="patientDoctor">Referred By (डॉक्टर का नाम)</label>
+        <input type="text" id="patientDoctor" value="Dr. S. K. Sharma (M.D., Medicine)">
+      </div>
+
+      <div class="patient-field">
+        <label for="sampleId">Lab Sample ID / Barcode</label>
+        <div class="id-badge-container">
+          <input type="text" id="sampleId" value="MPL-2026-9042" readonly>
+          <button id="regenIdBtn" class="btn btn-tiny" title="Generate New Sample ID">↻ New</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Health Stats Overview Bar -->
+  <section class="overview-metric-strip no-print">
+    <div class="metric-card" id="metricCardTotal">
+      <div class="metric-icon bg-cyan">📊</div>
+      <div class="metric-data">
+        <span class="metric-label">Parameters Monitored</span>
+        <span class="metric-value" id="statTotalParams">24</span>
+      </div>
+    </div>
+
+    <div class="metric-card" id="metricCardNormal">
+      <div class="metric-icon bg-green">🟢</div>
+      <div class="metric-data">
+        <span class="metric-label">Normal Range (सामान्य)</span>
+        <span class="metric-value text-green" id="statNormalCount">20</span>
+      </div>
+    </div>
+
+    <div class="metric-card" id="metricCardAlert">
+      <div class="metric-icon bg-amber">🟡</div>
+      <div class="metric-data">
+        <span class="metric-label">Borderline / Out of Range</span>
+        <span class="metric-value text-amber" id="statAlertCount">4</span>
+      </div>
+    </div>
+
+    <div class="metric-card" id="metricCardCritical">
+      <div class="metric-icon bg-rose">🚨</div>
+      <div class="metric-data">
+        <span class="metric-label">Critical Red Flags (गंभीर)</span>
+        <span class="metric-value text-rose" id="statCriticalCount">0</span>
+      </div>
+    </div>
+
+    <div class="metric-card" id="metricCardHealthScore">
+      <div class="metric-icon bg-purple">❤️‍🩹</div>
+      <div class="metric-data">
+        <span class="metric-label">Overall Health Index</span>
+        <div class="health-score-pill">
+          <span class="metric-value text-purple" id="statHealthIndex">86%</span>
+          <span class="health-grade" id="statHealthGrade">GOOD</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Navigation Tabs for Modules -->
+  <nav class="module-nav-tabs no-print" aria-label="Pathology Modules">
+    <button class="nav-tab active" data-tab="tab-cbc">
+      <span class="tab-emoji">🩸</span>
+      <span class="tab-text">Complete Blood Count (CBC)</span>
+      <span class="tab-sub">RBC, WBC, Platelets, Hb</span>
+    </button>
+    
+    <button class="nav-tab" data-tab="tab-bp">
+      <span class="tab-emoji">🫀</span>
+      <span class="tab-text">Blood Pressure & Pulse</span>
+      <span class="tab-sub">रक्तचाप व हृदय गति</span>
+    </button>
+
+    <button class="nav-tab" data-tab="tab-sugar">
+      <span class="tab-emoji">🧪</span>
+      <span class="tab-text">Blood Sugar & Diabetes</span>
+      <span class="tab-sub">FBS, PPBS, HbA1c, eAG</span>
+    </button>
+
+    <button class="nav-tab" data-tab="tab-lipid">
+      <span class="tab-emoji">🧬</span>
+      <span class="tab-text">Lipid & Cardiac Risk</span>
+      <span class="tab-sub">Cholesterol, HDL, LDL, Trig</span>
+    </button>
+
+    <button class="nav-tab" data-tab="tab-kidney">
+      <span class="tab-emoji">🫘</span>
+      <span class="tab-text">Kidney Function (KFT)</span>
+      <span class="tab-sub">Creatinine, Urea, eGFR</span>
+    </button>
+
+    <button class="nav-tab" data-tab="tab-liver">
+      <span class="tab-emoji">🔬</span>
+      <span class="tab-text">Liver Function (LFT)</span>
+      <span class="tab-sub">Bilirubin, SGOT/AST, SGPT</span>
+    </button>
+
+    <button class="nav-tab" data-tab="tab-ai-diag">
+      <span class="tab-emoji">🤖</span>
+      <span class="tab-text">Patho-AI Analyzer</span>
+      <span class="tab-sub">स्वचालित पैथोलॉजी निष्कर्ष</span>
+    </button>
+
+    <button class="nav-tab" data-tab="tab-encyclopedia">
+      <span class="tab-emoji">📖</span>
+      <span class="tab-text">Medical Guide / Range</span>
+      <span class="tab-sub">पैथोलॉजी संदर्भ मार्गदर्शिका</span>
+    </button>
+
+    <button class="nav-tab" data-tab="tab-history">
+      <span class="tab-emoji">📂</span>
+      <span class="tab-text">Patient Records</span>
+      <span class="tab-sub">सहेजे गए रिकॉर्ड</span>
+    </button>
+  </nav>
+
+  <!-- Main Container -->
+  <main class="main-content no-print">
+
+    <!-- ==============================================
+         TAB 1: COMPLETE BLOOD COUNT (CBC)
+         ============================================== -->
+    <section id="tab-cbc" class="tab-panel active">
+      <div class="panel-header">
+        <div class="panel-title-group">
+          <h2>🩸 Complete Blood Count (CBC / Hemogram - संपूर्ण रक्त गणना)</h2>
+          <p class="panel-desc">Evaluate overall health, detect infections, anemia, leukemia, and platelet disorders like Dengue.</p>
+        </div>
+        <div class="panel-actions">
+          <button class="btn btn-outline btn-sm reset-tab-btn" data-panel="cbc">Reset CBC Defaults</button>
+        </div>
+      </div>
+
+      <div class="dashboard-grid">
+        <!-- Main Form Cards -->
+        <div class="grid-col-8">
+          <div class="card glass-card">
+            <h3 class="card-title">
+              <span>Primary Hematology Parameters</span>
+              <span class="badge badge-info">Standard EDTA Blood</span>
+            </h3>
+
+            <div class="form-grid-3">
+              <!-- Platelets -->
+              <div class="input-card" id="cardPlatelets">
+                <div class="input-card-header">
+                  <label for="plateletsInput">Platelet Count (प्लेटलेट्स)</label>
+                  <span class="status-pill status-normal" id="statusPlatelets">Normal</span>
+                </div>
+                <div class="input-group">
+                  <input type="number" id="plateletsInput" value="240000" step="5000" min="5000" max="1000000">
+                  <span class="input-unit">/µL</span>
+                </div>
+                <div class="range-hint">Ref Range: 150,000 - 450,000 /µL</div>
+                <div class="micro-bar-wrapper">
+                  <div class="micro-bar-track">
+                    <div class="micro-bar-fill" id="barPlatelets"></div>
+                  </div>
+                </div>
+                <div class="quick-chips">
+                  <button type="button" class="chip-btn" data-target="plateletsInput" data-val="35000">Dengue Alert (35k)</button>
+                  <button type="button" class="chip-btn" data-target="plateletsInput" data-val="250000">Normal (2.5L)</button>
+                </div>
+              </div>
+
+              <!-- RBC Count -->
+              <div class="input-card" id="cardRbc">
+                <div class="input-card-header">
+                  <label for="rbcInput">RBC Count (लाल रक्त कोशिकाएं)</label>
+                  <span class="status-pill status-normal" id="statusRbc">Normal</span>
+                </div>
+                <div class="input-group">
+                  <input type="number" id="rbcInput" value="4.8" step="0.1" min="1.0" max="8.0">
+                  <span class="input-unit">10^6/µL</span>
+                </div>
+                <div class="range-hint" id="rbcRefHint">Ref: 4.5 - 5.5 M/µL (M), 4.0 - 5.0 (F)</div>
+                <div class="micro-bar-wrapper">
+                  <div class="micro-bar-track">
+                    <div class="micro-bar-fill" id="barRbc"></div>
+                  </div>
+                </div>
+                <div class="quick-chips">
+                  <button type="button" class="chip-btn" data-target="rbcInput" data-val="3.2">Low (3.2)</button>
+                  <button type="button" class="chip-btn" data-target="rbcInput" data-val="4.9">Normal (4.9)</button>
+                </div>
+              </div>
+
+              <!-- Hemoglobin -->
+              <div class="input-card" id="cardHb">
+                <div class="input-card-header">
+                  <label for="hbInput">Hemoglobin (Hb - हीमोग्लोबिन)</label>
+                  <span class="status-pill status-normal" id="statusHb">Normal</span>
+                </div>
+                <div class="input-group">
+                  <input type="number" id="hbInput" value="14.2" step="0.1" min="3.0" max="25.0">
+                  <span class="input-unit">g/dL</span>
+                </div>
+                <div class="range-hint" id="hbRefHint">Ref: 13.0 - 17.5 g/dL (M), 12.0 - 15.5 (F)</div>
+                <div class="micro-bar-wrapper">
+                  <div class="micro-bar-track">
+                    <div class="micro-bar-fill" id="barHb"></div>
+                  </div>
+                </div>
+                <div class="quick-chips">
+                  <button type="button" class="chip-btn" data-target="hbInput" data-val="7.5">Severe Anemia (7.5)</button>
+                  <button type="button" class="chip-btn" data-target="hbInput" data-val="14.5">Normal (14.5)</button>
+                </div>
+              </div>
+
+              <!-- Total WBC -->
+              <div class="input-card" id="cardWbc">
+                <div class="input-card-header">
+                  <label for="wbcInput">Total WBC / Leukocytes (श्वेत रक्त कण)</label>
+                  <span class="status-pill status-normal" id="statusWbc">Normal</span>
+                </div>
+                <div class="input-group">
+                  <input type="number" id="wbcInput" value="7200" step="100" min="500" max="60000">
+                  <span class="input-unit">/µL</span>
+                </div>
+                <div class="range-hint">Ref Range: 4,000 - 11,000 /µL</div>
+                <div class="micro-bar-wrapper">
+                  <div class="micro-bar-track">
+                    <div class="micro-bar-fill" id="barWbc"></div>
+                  </div>
+                </div>
+                <div class="quick-chips">
+                  <button type="button" class="chip-btn" data-target="wbcInput" data-val="18500">Infection (18.5k)</button>
+                  <button type="button" class="chip-btn" data-target="wbcInput" data-val="7500">Normal (7.5k)</button>
+                </div>
+              </div>
+
+              <!-- Hematocrit (PCV) -->
+              <div class="input-card" id="cardPcv">
+                <div class="input-card-header">
+                  <label for="pcvInput">Hematocrit / PCV (हेमाटोक्रिट)</label>
+                  <span class="status-pill status-normal" id="statusPcv">Normal</span>
+                </div>
+                <div class="input-group">
+                  <input type="number" id="pcvInput" value="42.5" step="0.5" min="10" max="70">
+                  <span class="input-unit">%</span>
+                </div>
+                <div class="range-hint" id="pcvRefHint">Ref: 40 - 52% (M), 36 - 48% (F)</div>
+                <div class="micro-bar-wrapper">
+                  <div class="micro-bar-track">
+                    <div class="micro-bar-fill" id="barPcv"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ESR (Erythrocyte Sedimentation Rate) -->
+              <div class="input-card" id="cardEsr">
+                <div class="input-card-header">
+                  <label for="esrInput">ESR (Westergren Method)</label>
+                  <span class="status-pill status-normal" id="statusEsr">Normal</span>
+                </div>
+                <div class="input-group">
+                  <input type="number" id="esrInput" value="12" step="1" min="0" max="150">
+                  <span class="input-unit">mm/1st hr</span>
+                </div>
+                <div class="range-hint">Ref: 0 - 15 mm (M), 0 - 20 mm (F)</div>
+                <div class="micro-bar-wrapper">
+                  <div class="micro-bar-track">
+                    <div class="micro-bar-fill" id="barEsr"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- WBC Differential (DLC) Section -->
+            <div class="sub-section-divider">
+              <h4>WBC Differential Count (DLC - ल्यूकोसाइट विभेदक गणना)</h4>
+              <span class="dlc-total-badge" id="dlcTotalBadge">Total: 100%</span>
+            </div>
+
+            <div class="form-grid-5">
+              <div class="dlc-cell">
+                <label for="dlcNeutro">Neutrophils</label>
+                <div class="input-group compact">
+                  <input type="number" id="dlcNeutro" value="62" min="0" max="100">
+                  <span class="input-unit">%</span>
+                </div>
+                <span class="range-hint">Ref: 40 - 70%</span>
+              </div>
+
+              <div class="dlc-cell">
+                <label for="dlcLympho">Lymphocytes</label>
+                <div class="input-group compact">
+                  <input type="number" id="dlcLympho" value="28" min="0" max="100">
+                  <span class="input-unit">%</span>
+                </div>
+                <span class="range-hint">Ref: 20 - 40%</span>
+              </div>
+
+              <div class="dlc-cell">
+                <label for="dlcMono">Monocytes</label>
+                <div class="input-group compact">
+                  <input type="number" id="dlcMono" value="5" min="0" max="100">
+                  <span class="input-unit">%</span>
+                </div>
+                <span class="range-hint">Ref: 2 - 8%</span>
+              </div>
+
+              <div class="dlc-cell">
+                <label for="dlcEos">Eosinophils</label>
+                <div class="input-group compact">
+                  <input type="number" id="dlcEos" value="3" min="0" max="100">
+                  <span class="input-unit">%</span>
+                </div>
+                <span class="range-hint">Ref: 1 - 4%</span>
+              </div>
+
+              <div class="dlc-cell">
+                <label for="dlcBaso">Basophils</label>
+                <div class="input-group compact">
+                  <input type="number" id="dlcBaso" value="2" min="0" max="100">
+                  <span class="input-unit">%</span>
+                </div>
+                <span class="range-hint">Ref: 0.5 - 2%</span>
+              </div>
+            </div>
+
+            <!-- Red Cell Indices (MCV, MCH, MCHC) -->
+            <div class="sub-section-divider">
+              <h4>Red Blood Cell Indices (एरिथ्रोसाइट सूचकांक - ऑटो-कैलकुलेटेड)</h4>
+              <span class="badge badge-outline">Auto-Derived</span>
+            </div>
+
+            <div class="form-grid-4">
+              <div class="calc-indicator-box">
+                <span class="calc-label">MCV (Mean Corpuscular Vol)</span>
+                <span class="calc-value" id="valMcv">88.5 <small>fL</small></span>
+                <span class="calc-range">Ref: 80 - 100 fL</span>
+              </div>
+              <div class="calc-indicator-box">
+                <span class="calc-label">MCH (Mean Corpuscular Hb)</span>
+                <span class="calc-value" id="valMch">29.6 <small>pg</small></span>
+                <span class="calc-range">Ref: 27 - 33 pg</span>
+              </div>
+              <div class="calc-indicator-box">
+                <span class="calc-label">MCHC (Mean Corpuscular Hb Conc)</span>
+                <span class="calc-value" id="valMchc">33.4 <small>g/dL</small></span>
+                <span class="calc-range">Ref: 32 - 36 g/dL</span>
+              </div>
+              <div class="calc-indicator-box">
+                <span class="calc-label">RDW (Red Cell Dist Width)</span>
+                <div class="input-group compact">
+                  <input type="number" id="rdwInput" value="12.8" step="0.1" min="8" max="25">
+                  <span class="input-unit">%</span>
+                </div>
+                <span class="calc-range">Ref: 11.5 - 14.5%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CBC Clinical Analysis Sidebar -->
+        <div class="grid-col-4">
+          <div class="card glass-card side-analysis-card">
+            <h3 class="card-title">
+              <span>CBC Clinical Diagnosis</span>
+              <span class="badge badge-accent">Live AI</span>
+            </h3>
+
+            <!-- Platelet Alert Warning Widget -->
+            <div class="alert-box alert-platelet" id="plateletAlertBox">
+              <div class="alert-icon">🩸</div>
+              <div class="alert-content">
+                <h4 id="plateletAlertTitle">Normal Platelet Count</h4>
+                <p id="plateletAlertDesc">Platelet aggregation and clotting capability within normal parameters.</p>
+              </div>
+            </div>
+
+            <!-- Anemia Assessment Widget -->
+            <div class="alert-box alert-anemia" id="anemiaAlertBox">
+              <div class="alert-icon">🧬</div>
+              <div class="alert-content">
+                <h4 id="anemiaAlertTitle">No Anemia Detected</h4>
+                <p id="anemiaAlertDesc">Hemoglobin and Red Cell indices indicate healthy oxygen carrying capacity.</p>
+              </div>
+            </div>
+
+            <!-- WBC / Immune Response Widget -->
+            <div class="alert-box alert-immune" id="immuneAlertBox">
+              <div class="alert-icon">🛡️</div>
+              <div class="alert-content">
+                <h4 id="immuneAlertTitle">Normal Leukocyte Profile</h4>
+                <p id="immuneAlertDesc">No acute leukocytosis or leukopenia detected. Normal immune surveillance.</p>
+              </div>
+            </div>
+
+            <div class="clinical-note-box">
+              <strong>Pathologist Clinical Notes:</strong>
+              <textarea id="cbcNotes" rows="3" class="styled-textarea" placeholder="Auto-generated notes will appear here, or enter custom remarks..."></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================
+         TAB 2: BLOOD PRESSURE & HEMODYNAMICS
+         ============================================== -->
+    <section id="tab-bp" class="tab-panel">
+      <div class="panel-header">
+        <div class="panel-title-group">
+          <h2>🫀 Blood Pressure & Hemodynamics (रक्तचाप एवं कार्डियोवस्कुलर)</h2>
+          <p class="panel-desc">AHA/ACC 2017 Guidelines Blood Pressure staging, Mean Arterial Pressure (MAP), Pulse Pressure, and Shock Index.</p>
+        </div>
+      </div>
+
+      <div class="dashboard-grid">
+        <div class="grid-col-7">
+          <div class="card glass-card">
+            <h3 class="card-title">Sphygmomanometer & Hemodynamic Reading</h3>
+
+            <div class="form-grid-3">
+              <!-- Systolic -->
+              <div class="input-card highlight-cyan">
+                <div class="input-card-header">
+                  <label for="bpSystolic">Systolic BP (सिस्टोलिक - ऊपर का)</label>
+                  <span class="status-pill status-normal" id="statusSys">Normal</span>
+                </div>
+                <div class="input-group large-input">
+                  <input type="number" id="bpSystolic" value="120" min="60" max="260" step="1">
+                  <span class="input-unit">mmHg</span>
+                </div>
+                <input type="range" class="range-slider" id="sliderSys" min="60" max="220" value="120">
+                <div class="range-hint">Target: < 120 mmHg</div>
+              </div>
+
+              <!-- Diastolic -->
+              <div class="input-card highlight-blue">
+                <div class="input-card-header">
+                  <label for="bpDiastolic">Diastolic BP (डायस्टोलिक - नीचे का)</label>
+                  <span class="status-pill status-normal" id="statusDia">Normal</span>
+                </div>
+                <div class="input-group large-input">
+                  <input type="number" id="bpDiastolic" value="80" min="40" max="150" step="1">
+                  <span class="input-unit">mmHg</span>
+                </div>
+                <input type="range" class="range-slider" id="sliderDia" min="40" max="140" value="80">
+                <div class="range-hint">Target: < 80 mmHg</div>
+              </div>
+
+              <!-- Pulse / Heart Rate -->
+              <div class="input-card highlight-rose">
+                <div class="input-card-header">
+                  <label for="bpPulse">Pulse / Heart Rate (हृदय गति)</label>
+                  <span class="status-pill status-normal" id="statusPulse">Normal</span>
+                </div>
+                <div class="input-group large-input">
+                  <input type="number" id="bpPulse" value="74" min="30" max="220" step="1">
+                  <span class="input-unit">BPM</span>
+                </div>
+                <input type="range" class="range-slider" id="sliderPulse" min="40" max="160" value="74">
+                <div class="range-hint">Normal: 60 - 100 BPM</div>
+              </div>
+            </div>
+
+            <!-- Hemodynamic Derived Calculations -->
+            <div class="sub-section-divider">
+              <h4>Hemodynamic Vital Calculations</h4>
+            </div>
+
+            <div class="form-grid-3">
+              <div class="calc-indicator-box">
+                <span class="calc-label">Mean Arterial Pressure (MAP)</span>
+                <span class="calc-value text-cyan" id="valMap">93.3 <small>mmHg</small></span>
+                <span class="calc-range">Normal: 70 - 100 mmHg</span>
+                <p class="calc-formula">Formula: (2 × Diastolic + Systolic) ÷ 3</p>
+              </div>
+
+              <div class="calc-indicator-box">
+                <span class="calc-label">Pulse Pressure (PP)</span>
+                <span class="calc-value text-blue" id="valPulsePressure">40 <small>mmHg</small></span>
+                <span class="calc-range">Normal: 30 - 50 mmHg</span>
+                <p class="calc-formula">Formula: Systolic − Diastolic</p>
+              </div>
+
+              <div class="calc-indicator-box">
+                <span class="calc-label">Shock Index (SI)</span>
+                <span class="calc-value text-green" id="valShockIndex">0.62</span>
+                <span class="calc-range">Normal: 0.5 - 0.7</span>
+                <p class="calc-formula">Formula: Heart Rate ÷ Systolic BP</p>
+              </div>
+            </div>
+
+            <!-- Quick BP Scenario Buttons -->
+            <div class="preset-buttons-row">
+              <span class="small-text">Quick Scenarios:</span>
+              <button type="button" class="btn btn-tiny btn-ghost" onclick="setBP(115, 75, 72)">Optimal (115/75)</button>
+              <button type="button" class="btn btn-tiny btn-ghost" onclick="setBP(128, 78, 78)">Elevated (128/78)</button>
+              <button type="button" class="btn btn-tiny btn-ghost" onclick="setBP(136, 86, 82)">Hypertension Stage 1 (136/86)</button>
+              <button type="button" class="btn btn-tiny btn-ghost" onclick="setBP(155, 96, 92)">Hypertension Stage 2 (155/96)</button>
+              <button type="button" class="btn btn-tiny btn-ghost" onclick="setBP(190, 125, 110)">Hypertensive Crisis (190/125)</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- BP Visual Gauge & Stage Card -->
+        <div class="grid-col-5">
+          <div class="card glass-card bp-display-card">
+            <h3 class="card-title">AHA / ACC Classification</h3>
+
+            <div class="bp-stage-banner" id="bpStageBanner">
+              <div class="stage-icon" id="bpStageIcon">🫀</div>
+              <div class="stage-info">
+                <div class="stage-name" id="bpStageName">NORMAL BLOOD PRESSURE</div>
+                <div class="stage-hindi" id="bpStageHindi">सामान्य रक्तचाप (स्वस्थ)</div>
+              </div>
+            </div>
+
+            <!-- Interactive Gauge Graphic -->
+            <div class="gauge-container">
+              <div class="bp-meter-bar">
+                <div class="bp-zone zone-normal" title="Normal: <120/<80"></div>
+                <div class="bp-zone zone-elevated" title="Elevated: 120-129/<80"></div>
+                <div class="bp-zone zone-stage1" title="Stage 1: 130-139/80-89"></div>
+                <div class="bp-zone zone-stage2" title="Stage 2: 140-179/90-119"></div>
+                <div class="bp-zone zone-crisis" title="Crisis: ≥180/≥120"></div>
+                <div class="bp-needle" id="bpNeedle" style="left: 20%;"></div>
+              </div>
+              <div class="gauge-labels">
+                <span>Normal</span>
+                <span>Elevated</span>
+                <span>Stage 1</span>
+                <span>Stage 2</span>
+                <span class="text-rose">Crisis</span>
+              </div>
+            </div>
+
+            <div class="clinical-recommendation" id="bpAdviceBox">
+              <h4>🩺 Clinical Recommendation & Lifestyle:</h4>
+              <p id="bpAdviceText">Maintain a healthy, low-sodium balanced diet, regular aerobic exercise, and monitor blood pressure annually.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================
+         TAB 3: BLOOD SUGAR & DIABETES PANEL
+         ============================================== -->
+    <section id="tab-sugar" class="tab-panel">
+      <div class="panel-header">
+        <div class="panel-title-group">
+          <h2>🧪 Blood Sugar & Diabetes Panel (रक्त शर्करा एवं मधुमेह प्रोफाइल)</h2>
+          <p class="panel-desc">Assess Glycemic control, Fasting, Post-Prandial, Random Glucose, HbA1c, and estimated Average Glucose (eAG).</p>
+        </div>
+      </div>
+
+      <div class="dashboard-grid">
+        <div class="grid-col-8">
+          <div class="card glass-card">
+            <h3 class="card-title">Glucose & Glycated Hemoglobin Parameters</h3>
+
+            <div class="form-grid-3">
+              <!-- Fasting Blood Sugar -->
+              <div class="input-card" id="cardFbs">
+                <div class="input-card-header">
+                  <label for="sugarFbs">Fasting Blood Sugar (FBS - खाली पेट)</label>
+                  <span class="status-pill status-normal" id="statusFbs">Normal</span>
+                </div>
+                <div class="input-group">
+                  <input type="number" id="sugarFbs" value="92" min="30" max="500">
+                  <span class="input-unit">mg/dL</span>
+                </div>
+                <div class="range-hint">Normal: 70 - 99 mg/dL | Pre-D: 100-125</div>
+                <div class="micro-bar-wrapper">
+                  <div class="micro-bar-track">
+                    <div class="micro-bar-fill" id="barFbs"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Post Prandial Blood Sugar -->
+              <div class="input-card" id="cardPpbs">
+                <div class="input-card-header">
+                  <label for="sugarPpbs">Post-Prandial (PPBS - भोजन उपरांत)</label>
+                  <span class="status-pill status-normal" id="statusPpbs">Normal</span>
+                </div>
+                <div class="input-group">
+                  <input type="number" id="sugarPpbs" value="128" min="30" max="600">
+                  <span class="input-unit">mg/dL</span>
+                </div>
+                <div class="range-hint">Normal: < 140 mg/dL | Pre-D: 140-199</div>
+                <div class="micro-bar-wrapper">
+                  <div class="micro-bar-track">
+                    <div class="micro-bar-fill" id="barPpbs"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Random Blood Sugar -->
+              <div class="input-card" id="cardRbs">
+                <div class="input-card-header">
+                  <label for="sugarRbs">Random Blood Sugar (RBS)</label>
+                  <span class="status-pill status-normal" id="statusRbs">Normal</span>
+                </div>
+                <div class="input-group">
+                  <input type="number" id="sugarRbs" value="110" min="30" max="600">
+                  <span class="input-unit">mg/dL</span>
+                </div>
+                <div class="range-hint">Normal: 70 - 140 mg/dL</div>
+                <div class="micro-bar-wrapper">
+                  <div class="micro-bar-track">
+                    <div class="micro-bar-fill" id="barRbs"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- HbA1c -->
+              <div class="input-card highlight-purple" id="cardHba1c">
+                <div class="input-card-header">
+                  <label for="sugarHba1c">HbA1c (Glycosylated Hemoglobin)</label>
+                  <span class="status-pill status-normal" id="statusHba1c">Normal</span>
+                </div>
+                <div class="input-group">
+                  <input type="number" id="sugarHba1c" value="5.4" step="0.1" min="3.5" max="18.0">
+                  <span class="input-unit">%</span>
+                </div>
+                <div class="range-hint">Normal: < 5.7% | Pre-D: 5.7-6.4% | DM: ≥6.5%</div>
+                <div class="micro-bar-wrapper">
+                  <div class="micro-bar-track">
+                    <div class="micro-bar-fill" id="barHba1c"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Estimated Average Glucose (eAG) Derived -->
+              <div class="calc-indicator-box">
+                <span class="calc-label">Calculated eAG (3-Month Average)</span>
+                <span class="calc-value text-purple" id="valEag">108 <small>mg/dL</small></span>
+                <span class="calc-range">Formula: 28.7 × HbA1c − 46.7</span>
+                <p class="calc-formula">Reflects 90-day mean glucose</p>
+              </div>
+
+              <!-- Urine Glucose & Ketones -->
+              <div class="input-card">
+                <div class="input-card-header">
+                  <label for="urineGlucose">Urine Sugar & Ketones</label>
+                  <span class="status-pill status-normal" id="statusUrineSugar">Negative</span>
+                </div>
+                <div class="form-row-2">
+                  <select id="urineGlucose">
+                    <option value="Nil" selected>Glucose: Nil (Negative)</option>
+                    <option value="Trace">Trace (+)</option>
+                    <option value="1+">1+ (100 mg/dL)</option>
+                    <option value="2+">2+ (250 mg/dL)</option>
+                    <option value="3+">3+ (500 mg/dL)</option>
+                    <option value="4+">4+ (>1000 mg/dL)</option>
+                  </select>
+                  <select id="urineKetones">
+                    <option value="Negative" selected>Ketones: Negative</option>
+                    <option value="Trace">Trace</option>
+                    <option value="Positive">Positive (DKA Risk!)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sugar Presets -->
+            <div class="preset-buttons-row">
+              <span class="small-text">Quick Presets:</span>
+              <button type="button" class="btn btn-tiny btn-ghost" onclick="setSugar(90, 125, 105, 5.3)">Normal Glucose</button>
+              <button type="button" class="btn btn-tiny btn-ghost" onclick="setSugar(118, 165, 145, 6.1)">Pre-Diabetes</button>
+              <button type="button" class="btn btn-tiny btn-ghost" onclick="setSugar(175, 260, 240, 8.8)">Uncontrolled Diabetes (DM)</button>
+              <button type="button" class="btn btn-tiny btn-ghost" onclick="setSugar(52, 65, 58, 4.8)">Hypoglycemia Danger (<60)</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-col-4">
+          <div class="card glass-card">
+            <h3 class="card-title">ADA Glycemic Status</h3>
+
+            <div class="sugar-status-card" id="sugarStatusCard">
+              <div class="status-big-icon" id="sugarStatusIcon">🟢</div>
+              <div class="status-big-title" id="sugarStatusTitle">Euglycemic (Normal)</div>
+              <div class="status-big-subtitle" id="sugarStatusSub">शर्करा स्तर सामान्य है</div>
+            </div>
+
+            <div class="progress-list">
+              <div class="progress-item">
+                <div class="progress-info">
+                  <span>HbA1c Target Threshold</span>
+                  <span id="hba1cThresholdText">5.4% / 5.7%</span>
+                </div>
+                <div class="progress-bar-track">
+                  <div class="progress-bar-val bg-green" id="barProgressHba1c" style="width: 35%;"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="clinical-note-box">
+              <h4>Dietary & Medical Advice:</h4>
+              <p id="sugarAdviceText">Normal insulin sensitivity. Continue low glycemic-index foods and active routine.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================
+         TAB 4: LIPID PROFILE & CARDIAC RISK
+         ============================================== -->
+    <section id="tab-lipid" class="tab-panel">
+      <div class="panel-header">
+        <div class="panel-title-group">
+          <h2>🧬 Lipid Profile & Cardiovascular Risk (लिपिड व कोलेस्ट्रॉल परीक्षण)</h2>
+          <p class="panel-desc">Assess Coronary Artery Disease risk, Atherogenic Dyslipidemia, and Cholesterol fractions.</p>
+        </div>
+      </div>
+
+      <div class="dashboard-grid">
+        <div class="grid-col-8">
+          <div class="card glass-card">
+            <h3 class="card-title">Serum Lipid Fractions</h3>
+
+            <div class="form-grid-3">
+              <!-- Total Cholesterol -->
+              <div class="input-card" id="cardCholesterol">
+                <div class="input-card-header">
+                  <label for="lipidChol">Total Cholesterol (कुल कोलेस्ट्रॉल)</label>
+                  <span class="status-pill status-normal" id="statusChol">Desirable</span>
+                </div>
+                <div class="input-group">
+                  <input type="number" id="lipidChol" value="175" min="50" max="600">
+                  <span class="input-unit">mg/dL</span>
+                </div>
+                <div class="range-hint">Desirable: < 200 | Borderline: 200-239 | High: ≥ 240</div>
+                <div class="micro-bar-wrapper">
+                  <div class="micro-bar-track">
+                    <div class="micro-bar-fill" id="barChol"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- HDL (Good Cholesterol) -->
+              <div class="input-card highlight-green" id="cardHdl">
+                <div class="input-card-header">
+                  <label for="lipidHdl">HDL Cholesterol (गुड कोलेस्ट्रॉल)</label>
+                  <span class="status-pill status-normal" id="statusHdl">Protective</span>
+                </div>
+                <div class="input-group">
+                  <input type="number" id="lipidHdl" value="52" min="10" max="150">
+                  <span class="input-unit">mg/dL</span>
+                </div>
+                <div class="range-hint">Optimal: > 50 mg/dL (F), > 40 mg/dL (M)</div>
+                <div class="micro-bar-wrapper">
+                  <div class="micro-bar-track">
+                    <div class="micro-bar-fill" id="barHdl"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- LDL (Bad Cholesterol) -->
+              <div class="input-card highlight-rose" id="cardLdl">
+                <div class="input-card-header">
+                  <label for="lipidLdl">LDL Cholesterol (खराब कोलेस्ट्रॉल)</label>
+                  <span class="status-pill status-normal" id="statusLdl">Optimal</span>
+                </div>
+                <div class="input-group">
+                  <input type="number" id="lipidLdl" value="98" min="20" max="400">
+                  <span class="input-unit">mg/dL</span>
+                </div>
+                <div class="range-hint">Optimal: < 100 | Near Optimal: 100-129 | High: ≥ 160</div>
+                <div class="micro-bar-wrapper">
+                  <div class="micro-bar-track">
+                    <div class="micro-bar-fill" id="barLdl"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Triglycerides -->
+              <div class="input-card" id="cardTrig">
+                <div class="input-card-header">
+                  <label for="lipidTrig">Triglycerides (ट्राइग्लिसराइड्स)</label>
+                  <span class="status-pill status-normal" id="statusTrig">Normal</span>
+                </div>
+                <div class="input-group">
+                  <input type="number" id="lipidTrig" value="130" min="20" max="1000">
+                  <span class="input-unit">mg/dL</span>
+                </div>
+                <div class="range-hint">Normal: < 150 | Borderline: 150-199 | High: ≥ 200</div>
+                <div class="micro-bar-wrapper">
+                  <div class="micro-bar-track">
+                    <div class="micro-bar-fill" id="barTrig"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- VLDL -->
+              <div class="calc-indicator-box">
+                <span class="calc-label">VLDL Cholesterol (Auto)</span>
+                <span class="calc-value text-cyan" id="valVldl">26.0 <small>mg/dL</small></span>
+                <span class="calc-range">Ref: 5.0 - 30.0 mg/dL</span>
+                <p class="calc-formula">Calculated: Triglycerides ÷ 5</p>
+              </div>
+
+              <!-- Non-HDL Cholesterol -->
+              <div class="calc-indicator-box">
+                <span class="calc-label">Non-HDL Cholesterol</span>
+                <span class="calc-value text-blue" id="valNonHdl">123 <small>mg/dL</small></span>
+                <span class="calc-range">Target: < 130 mg/dL</span>
+                <p class="calc-formula">Total Cholesterol − HDL</p>
+              </div>
+            </div>
+
+            <!-- Derived Ratios -->
+            <div class="sub-section-divider">
+              <h4>Atherogenic & Cardiac Ratios</h4>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="calc-indicator-box">
+                <span class="calc-label">Total Cholesterol / HDL Ratio</span>
+                <span class="calc-value" id="valCholHdlRatio">3.36</span>
+                <span class="calc-range">Desirable: < 4.5 | High Risk: > 5.0</span>
+              </div>
+
+              <div class="calc-indicator-box">
+                <span class="calc-label">LDL / HDL Ratio</span>
+                <span class="calc-value" id="valLdlHdlRatio">1.88</span>
+                <span class="calc-range">Desirable: < 3.0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-col-4">
+          <div class="card glass-card">
+            <h3 class="card-title">Atherogenic Risk Score</h3>
+
+            <div class="alert-box" id="lipidRiskBox">
+              <div class="alert-icon">🫀</div>
+              <div class="alert-content">
+                <h4 id="lipidRiskTitle">Low Cardiovascular Risk</h4>
+                <p id="lipidRiskDesc">Favorable lipid balance with protective HDL levels. Low 10-year atherosclerotic risk.</p>
+              </div>
+            </div>
+
+            <div class="cardiac-diet-guide">
+              <h5>Heart Healthy Diet Tips:</h5>
+              <ul>
+                <li>Avoid trans fats, fried foods, and refined palm oil.</li>
+                <li>Incorporate Omega-3 fatty acids (flaxseeds, walnuts, fish).</li>
+                <li>Increase soluble fiber (oats, isabgol, legumes).</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================
+         TAB 5: KIDNEY FUNCTION TEST (KFT / RFT)
+         ============================================== -->
+    <section id="tab-kidney" class="tab-panel">
+      <div class="panel-header">
+        <div class="panel-title-group">
+          <h2>🫘 Renal / Kidney Function Test (KFT / RFT - गुर्दा कार्य परीक्षण)</h2>
+          <p class="panel-desc">Assess Glomerular Filtration, Serum Creatinine, Blood Urea, Uric Acid, and CKD Staging.</p>
+        </div>
+      </div>
+
+      <div class="dashboard-grid">
+        <div class="grid-col-8">
+          <div class="card glass-card">
+            <h3 class="card-title">Serum Renal Biomarkers</h3>
+
+            <div class="form-grid-3">
+              <!-- Creatinine -->
+              <div class="input-card highlight-cyan" id="cardCreatinine">
+                <div class="input-card-header">
+                  <label for="kftCreatinine">Serum Creatinine (सीरम क्रिएटिनिन)</label>
+                  <span class="status-pill status-normal" id="statusCreatinine">Normal</span>
+                </div>
+                <div class="input-group">
+                  <input type="number" id="kftCreatinine" value="0.95" step="0.05" min="0.2" max="18.0">
+                  <span class="input-unit">mg/dL</span>
+                </div>
+                <div class="range-hint" id="kftCreatinineRef">Ref: 0.7 - 1.3 mg/dL (M), 0.6 - 1.1 (F)</div>
+                <div class="micro-bar-wrapper">
+                  <div class="micro-bar-track">
+                    <div class="micro-bar-fill" id="barCreatinine"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Blood Urea / BUN -->
+              <div class="input-card" id="cardUrea">
+                <div class="input-card-header">
+                  <label for="kftUrea">Blood Urea (रक्त यूरिया)</label>
+                  <span class="status-pill status-normal" id="statusUrea">Normal</span>
+                </div>
+                <div class="input-group">
+                  <input type="number" id="kftUrea" value="26" step="1" min="5" max="300">
+                  <span class="input-unit">mg/dL</span>
+                </div>
+                <div class="range-hint">Ref Range: 15 - 45 mg/dL</div>
+                <div class="micro-bar-wrapper">
+                  <div class="micro-bar-track">
+                    <div class="micro-bar-fill" id="barUrea"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Uric Acid -->
+              <div class="input-card" id="cardUric">
+                <div class="input-card-header">
+                  <label for="kftUric">Serum Uric Acid (यूरिक एसिड - गाउट)</label>
+                  <span class="status-pill status-normal" id="statusUric">Normal</span>
+                </div>
+                <div class="input-group">
+                  <input type="number" id="kftUric" value="5.2" step="0.1" min="1.0" max="20.0">
+                  <span class="input-unit">mg/dL</span>
+                </div>
+                <div class="range-hint">Ref: 3.5 - 7.2 mg/dL (M), 2.6 - 6.0 (F)</div>
+                <div class="micro-bar-wrapper">
+                  <div class="micro-bar-track">
+                    <div class="micro-bar-fill" id="barUric"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- BUN (Blood Urea Nitrogen) Auto -->
+              <div class="calc-indicator-box">
+                <span class="calc-label">BUN (Blood Urea Nitrogen)</span>
+                <span class="calc-value text-blue" id="valBun">12.1 <small>mg/dL</small></span>
+                <span class="calc-range">Ref: 7 - 20 mg/dL</span>
+                <p class="calc-formula">Blood Urea ÷ 2.14</p>
+              </div>
+
+              <!-- BUN / Creatinine Ratio -->
+              <div class="calc-indicator-box">
+                <span class="calc-label">BUN / Creatinine Ratio</span>
+                <span class="calc-value" id="valBunCreatRatio">12.7</span>
+                <span class="calc-range">Normal: 10:1 - 20:1</span>
+              </div>
+
+              <!-- Serum Electrolytes -->
+              <div class="input-card">
+                <div class="input-card-header">
+                  <label for="electrolyteNa">Sodium (Na+) & Potassium (K+)</label>
+                  <span class="status-pill status-normal">Electrolytes</span>
+                </div>
+                <div class="form-row-2">
+                  <div class="input-group compact">
+                    <input type="number" id="electrolyteNa" value="140" min="100" max="180">
+                    <span class="input-unit">Na+</span>
+                  </div>
+                  <div class="input-group compact">
+                    <input type="number" id="electrolyteK" value="4.2" step="0.1" min="1.5" max="9.0">
+                    <span class="input-unit">K+</span>
+                  </div>
+                </div>
+                <span class="range-hint">Na: 135-145 mEq/L | K: 3.5-5.1 mEq/L</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-col-4">
+          <div class="card glass-card">
+            <h3 class="card-title">Estimated GFR & CKD Stage</h3>
+
+            <div class="ckd-stage-display" id="ckdStageDisplay">
+              <div class="egfr-number" id="valEgfr">98.5</div>
+              <div class="egfr-unit">mL/min/1.73m² (eGFR)</div>
+              <div class="ckd-stage-tag bg-green" id="ckdStageTag">CKD STAGE 1: NORMAL GFR</div>
+              <div class="ckd-hindi" id="ckdHindiText">किडनी की कार्यक्षमता सामान्य और उत्तम है</div>
+            </div>
+
+            <div class="clinical-note-box">
+              <h4>Renal Pathologist Impression:</h4>
+              <p id="kftImpressionText">Adequate renal clearance. No biochemical evidence of azotemia or hyperuricemia.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================
+         TAB 6: LIVER FUNCTION TEST (LFT)
+         ============================================== -->
+    <section id="tab-liver" class="tab-panel">
+      <div class="panel-header">
+        <div class="panel-title-group">
+          <h2>🔬 Liver Function Test (LFT - हेपेटिक / लिवर प्रोफाइल)</h2>
+          <p class="panel-desc">Assess Hepatic integrity, Biliary excretion, SGOT/AST, SGPT/ALT, Bilirubin, and Serum Proteins.</p>
+        </div>
+      </div>
+
+      <div class="dashboard-grid">
+        <div class="grid-col-8">
+          <div class="card glass-card">
+            <h3 class="card-title">Hepatic Enzymes & Bilirubin Fractions</h3>
+
+            <div class="form-grid-3">
+              <!-- Total Bilirubin -->
+              <div class="input-card" id="cardBiliTotal">
+                <div class="input-card-header">
+                  <label for="lftBiliTotal">Total Bilirubin (बिलिरूबिन)</label>
+                  <span class="status-pill status-normal" id="statusBiliTotal">Normal</span>
+                </div>
+                <div class="input-group">
+                  <input type="number" id="lftBiliTotal" value="0.8" step="0.1" min="0.1" max="25.0">
+                  <span class="input-unit">mg/dL</span>
+                </div>
+                <div class="range-hint">Ref: 0.2 - 1.2 mg/dL (>2.0 = Jaundice)</div>
+                <div class="micro-bar-wrapper">
+                  <div class="micro-bar-track">
+                    <div class="micro-bar-fill" id="barBiliTotal"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Direct Bilirubin -->
+              <div class="input-card" id="cardBiliDirect">
+                <div class="input-card-header">
+                  <label for="lftBiliDirect">Direct Bilirubin (Conjugated)</label>
+                  <span class="status-pill status-normal" id="statusBiliDirect">Normal</span>
+                </div>
+                <div class="input-group">
+                  <input type="number" id="lftBiliDirect" value="0.2" step="0.05" min="0.0" max="15.0">
+                  <span class="input-unit">mg/dL</span>
+                </div>
+                <div class="range-hint">Ref: 0.0 - 0.3 mg/dL</div>
+                <div class="micro-bar-wrapper">
+                  <div class="micro-bar-track">
+                    <div class="micro-bar-fill" id="barBiliDirect"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- SGOT / AST -->
+              <div class="input-card" id="cardSgot">
+                <div class="input-card-header">
+                  <label for="lftSgot">SGOT / AST (एसजीओटी)</label>
+                  <span class="status-pill status-normal" id="statusSgot">Normal</span>
+                </div>
+                <div class="input-group">
+                  <input type="number" id="lftSgot" value="28" min="5" max="2000">
+                  <span class="input-unit">U/L</span>
+                </div>
+                <div class="range-hint">Ref: 5 - 40 U/L</div>
+                <div class="micro-bar-wrapper">
+                  <div class="micro-bar-track">
+                    <div class="micro-bar-fill" id="barSgot"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- SGPT / ALT -->
+              <div class="input-card highlight-cyan" id="cardSgpt">
+                <div class="input-card-header">
+                  <label for="lftSgpt">SGPT / ALT (एसजीपीटी - लिवर एंजाइम)</label>
+                  <span class="status-pill status-normal" id="statusSgpt">Normal</span>
+                </div>
+                <div class="input-group">
+                  <input type="number" id="lftSgpt" value="32" min="5" max="2000">
+                  <span class="input-unit">U/L</span>
+                </div>
+                <div class="range-hint">Ref: 7 - 56 U/L (High in Fatty Liver)</div>
+                <div class="micro-bar-wrapper">
+                  <div class="micro-bar-track">
+                    <div class="micro-bar-fill" id="barSgpt"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Alkaline Phosphatase (ALP) -->
+              <div class="input-card" id="cardAlp">
+                <div class="input-card-header">
+                  <label for="lftAlp">Alkaline Phosphatase (ALP)</label>
+                  <span class="status-pill status-normal" id="statusAlp">Normal</span>
+                </div>
+                <div class="input-group">
+                  <input type="number" id="lftAlp" value="95" min="20" max="1500">
+                  <span class="input-unit">U/L</span>
+                </div>
+                <div class="range-hint">Ref: 44 - 147 U/L</div>
+                <div class="micro-bar-wrapper">
+                  <div class="micro-bar-track">
+                    <div class="micro-bar-fill" id="barAlp"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Total Protein & Albumin -->
+              <div class="input-card">
+                <div class="input-card-header">
+                  <label>Total Protein & Albumin</label>
+                  <span class="status-pill status-normal">Proteins</span>
+                </div>
+                <div class="form-row-2">
+                  <div class="input-group compact">
+                    <input type="number" id="lftTotalProtein" value="7.2" step="0.1" min="3.0" max="12.0">
+                    <span class="input-unit">TP (g/dL)</span>
+                  </div>
+                  <div class="input-group compact">
+                    <input type="number" id="lftAlbumin" value="4.3" step="0.1" min="1.0" max="7.0">
+                    <span class="input-unit">Alb (g/dL)</span>
+                  </div>
+                </div>
+                <span class="range-hint">TP: 6.0-8.3 g/dL | Alb: 3.5-5.0 g/dL</span>
+              </div>
+            </div>
+
+            <!-- De Ritis Ratio (AST/ALT) -->
+            <div class="sub-section-divider">
+              <h4>De Ritis Ratio & Synthetic Liver Function</h4>
+            </div>
+
+            <div class="form-grid-3">
+              <div class="calc-indicator-box">
+                <span class="calc-label">AST / ALT Ratio (De Ritis)</span>
+                <span class="calc-value" id="valDeRitis">0.88</span>
+                <span class="calc-range">< 1.0 = Viral/Fatty Liver | > 2.0 = Alcoholic</span>
+              </div>
+
+              <div class="calc-indicator-box">
+                <span class="calc-label">Globulin (Calculated)</span>
+                <span class="calc-value" id="valGlobulin">2.9 <small>g/dL</small></span>
+                <span class="calc-range">Ref: 2.0 - 3.5 g/dL</span>
+              </div>
+
+              <div class="calc-indicator-box">
+                <span class="calc-label">A/G Ratio (Albumin / Globulin)</span>
+                <span class="calc-value text-green" id="valAgRatio">1.48</span>
+                <span class="calc-range">Normal: 1.1 - 2.2</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-col-4">
+          <div class="card glass-card">
+            <h3 class="card-title">Hepatic Health Summary</h3>
+
+            <div class="alert-box alert-liver" id="liverAlertBox">
+              <div class="alert-icon">🩺</div>
+              <div class="alert-content">
+                <h4 id="liverAlertTitle">Liver Parenchyma Normal</h4>
+                <p id="liverAlertDesc">Bilirubin levels within standard range. No hepatocellular injury or cholestasis noted.</p>
+              </div>
+            </div>
+
+            <div class="clinical-note-box">
+              <h4>Dietary & Hepatoprotective Care:</h4>
+              <p>Maintain balanced hydration, avoid hepatotoxic drugs/alcohol, and maintain healthy BMI to prevent non-alcoholic fatty liver disease (NAFLD).</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================
+         TAB 7: PATHO-AI CLINICAL DIAGNOSTIC ENGINE
+         ============================================== -->
+    <section id="tab-ai-diag" class="tab-panel">
+      <div class="panel-header">
+        <div class="panel-title-group">
+          <h2>🤖 Patho-AI Clinical Diagnostic Engine (स्वचालित पैथोलॉजी विश्लेषण)</h2>
+          <p class="panel-desc">Real-time cross-parameter correlation algorithm identifying health patterns, systemic risks, and clinical flags.</p>
+        </div>
+        <div class="panel-actions">
+          <button id="runAiReanalysisBtn" class="btn btn-primary btn-sm">↻ Re-Analyze All Metrics</button>
+        </div>
+      </div>
+
+      <div class="dashboard-grid">
+        <!-- AI Diagnostic Findings -->
+        <div class="grid-col-8">
+          <div class="card glass-card">
+            <div class="ai-banner">
+              <div class="ai-chip">NEURAL MEDICAL ENGINE v4.2</div>
+              <h3>Comprehensive Diagnostic Synthesis for <span id="diagPatientName">Rajesh Kumar Verma</span></h3>
+              <p class="ai-meta">Automated cross-correlation across Hematology, Hemodynamics, Glycemic, Renal & Hepatic panels.</p>
+            </div>
+
+            <div class="findings-container" id="findingsContainer">
+              <!-- Dynamically populated findings cards -->
+            </div>
+
+            <div class="ai-recommendations-section">
+              <h4>🩺 Clinical Action Plan & Recommendations (चिकित्सीय सलाह):</h4>
+              <ul class="action-plan-list" id="actionPlanList">
+                <li>Maintain annual preventive master health checkup.</li>
+                <li>Continue balanced physical exercise and optimal hydration.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Risk Index Radar & Quick Metrics -->
+        <div class="grid-col-4">
+          <div class="card glass-card">
+            <h3 class="card-title">Risk Scoring Matrix</h3>
+
+            <div class="risk-meter-group">
+              <div class="risk-bar-item">
+                <div class="risk-header">
+                  <span>Cardiovascular Risk</span>
+                  <span id="riskLabelCardio" class="risk-tag low">Low</span>
+                </div>
+                <div class="risk-bar-track">
+                  <div class="risk-bar-fill bg-green" id="barRiskCardio" style="width: 20%;"></div>
+                </div>
+              </div>
+
+              <div class="risk-bar-item">
+                <div class="risk-header">
+                  <span>Diabetic / Metabolic Risk</span>
+                  <span id="riskLabelDiabetes" class="risk-tag low">Low</span>
+                </div>
+                <div class="risk-bar-track">
+                  <div class="risk-bar-fill bg-green" id="barRiskDiabetes" style="width: 18%;"></div>
+                </div>
+              </div>
+
+              <div class="risk-bar-item">
+                <div class="risk-header">
+                  <span>Infection / Inflammatory Risk</span>
+                  <span id="riskLabelInfection" class="risk-tag low">Low</span>
+                </div>
+                <div class="risk-bar-track">
+                  <div class="risk-bar-fill bg-green" id="barRiskInfection" style="width: 15%;"></div>
+                </div>
+              </div>
+
+              <div class="risk-bar-item">
+                <div class="risk-header">
+                  <span>Hepato-Renal Stress</span>
+                  <span id="riskLabelRenal" class="risk-tag low">Low</span>
+                </div>
+                <div class="risk-bar-track">
+                  <div class="risk-bar-fill bg-green" id="barRiskRenal" style="width: 12%;"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="export-report-box">
+              <p>Ready to finalize results?</p>
+              <button id="goToReportTabBtn" class="btn btn-accent full-width">
+                View & Print Official Lab Report 📄
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================
+         TAB 8: PATHOLOGY ENCYCLOPEDIA & REFERENCE
+         ============================================== -->
+    <section id="tab-encyclopedia" class="tab-panel">
+      <div class="panel-header">
+        <div class="panel-title-group">
+          <h2>📖 Pathology Reference Encyclopedia (पैथोलॉजी ज्ञानकोश)</h2>
+          <p class="panel-desc">Complete medical guide explaining what each blood component means, symptoms, and normal ranges in simple English & Hindi.</p>
+        </div>
+        <div class="search-box">
+          <input type="text" id="encyclopediaSearch" placeholder="🔍 Search test (e.g., Platelets, RBC, Sugar, BP, Creatinine)...">
+        </div>
+      </div>
+
+      <div class="encyclopedia-grid" id="encyclopediaGrid">
+        <!-- Will be dynamically populated with rich medical educational cards -->
+      </div>
+    </section>
+
+    <!-- ==============================================
+         TAB 9: PATIENT RECORDS & SAVED LOGS
+         ============================================== -->
+    <section id="tab-history" class="tab-panel">
+      <div class="panel-header">
+        <div class="panel-title-group">
+          <h2>📂 Patient Test History & Records (सहेजे गए टेस्ट रिकॉर्ड)</h2>
+          <p class="panel-desc">Manage, re-open, or export laboratory test reports saved locally in the browser.</p>
+        </div>
+        <div class="panel-actions">
+          <button id="saveCurrentRecordBtn" class="btn btn-primary btn-sm">💾 Save Current Patient Record</button>
+          <button id="clearAllRecordsBtn" class="btn btn-outline btn-sm">Clear History</button>
+        </div>
+      </div>
+
+      <div class="card glass-card">
+        <div class="table-responsive">
+          <table class="styled-table" id="recordsTable">
+            <thead>
+              <tr>
+                <th>Sample ID</th>
+                <th>Patient Name</th>
+                <th>Age / Sex</th>
+                <th>Date & Time</th>
+                <th>Platelets</th>
+                <th>Hemoglobin</th>
+                <th>BP (Sys/Dia)</th>
+                <th>Blood Sugar (FBS)</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="recordsTableBody">
+              <!-- Populated dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==============================================
+       OFFICIAL MEDICAL PATHOLOGY REPORT MODAL / PRINT VIEW
+       This section is styled with @media print for 100% genuine ISO-standard A4 lab reports!
+       ============================================== -->
+  <div id="reportModal" class="report-modal-overlay">
+    <div class="report-modal-container">
+      
+      <!-- Top Action Bar (Hidden when printing) -->
+      <div class="report-modal-bar no-print">
+        <div class="modal-bar-left">
+          <span class="report-ready-badge">✓ Official Report Ready</span>
+          <span class="report-filename" id="printReportFilename">MEDIPATH_REPORT_MPL-2026-9042.pdf</span>
+        </div>
+        <div class="modal-bar-right">
+          <button id="triggerPrintBtn" class="btn btn-primary glow-button">
+            🖨️ Print / Save as PDF (प्रिंट करें)
+          </button>
+          <button id="closeReportModalBtn" class="btn btn-outline">
+            ✕ Close
+          </button>
+        </div>
+      </div>
+
+      <!-- THE ACTUAL PRINTABLE REPORT PAPER (ISO A4 Standard) -->
+      <div class="printable-report-page" id="printableReport">
+        
+        <!-- Header with Lab Accreditation & Contact -->
+        <header class="report-header">
+          <div class="report-header-left">
+            <img src="assets/logo.jpg" alt="Logo" class="report-lab-logo">
+            <div class="report-lab-details">
+              <h1 class="report-lab-name" id="repLabName">MEDIPATH DIAGNOSTIC RESEARCH CENTER</h1>
+              <div class="report-accreditation" id="repLabAccreditation">
+                <span>NABL ACCREDITED LAB (CERT NO. MC-4921)</span> • <span>ISO 15189:2022 COMPLIANT</span> • <span>ICMR APPROVED</span>
+              </div>
+              <p class="report-lab-address" id="repLabAddress">Plot 42, Health City Complex, Medical Enclave, New Delhi - 110029</p>
+              <p class="report-lab-contact" id="repLabContact">Phone: +91 11 2684 9000 | Email: reports@medipathlabs.org | Web: www.medipathpro.org</p>
+            </div>
+          </div>
+          <div class="report-header-right">
+            <div class="report-barcode-box">
+              <div class="barcode-graphic" id="reportBarcodeGraphic">
+                ||||| | |||| ||| |||||| | |||||||| ||| |||
+              </div>
+              <span class="barcode-text" id="reportBarcodeText">MPL-2026-9042</span>
+            </div>
+            <div class="qr-placeholder">
+              <svg width="60" height="60" viewBox="0 0 100 100" fill="currentColor">
+                <rect x="0" y="0" width="30" height="30"></rect>
+                <rect x="70" y="0" width="30" height="30"></rect>
+                <rect x="0" y="70" width="30" height="30"></rect>
+                <rect x="10" y="10" width="10" height="10" fill="#fff"></rect>
+                <rect x="80" y="10" width="10" height="10" fill="#fff"></rect>
+                <rect x="10" y="80" width="10" height="10" fill="#fff"></rect>
+                <rect x="40" y="20" width="20" height="10"></rect>
+                <rect x="40" y="40" width="20" height="20"></rect>
+                <rect x="20" y="45" width="10" height="20"></rect>
+                <rect x="70" y="50" width="20" height="30"></rect>
+              </svg>
+              <span>Scan to Verify</span>
+            </div>
+          </div>
+        </header>
+
+        <!-- Patient Demographics Section -->
+        <section class="report-patient-info">
+          <div class="info-row">
+            <div class="info-cell">
+              <span class="info-label">Patient Name:</span>
+              <span class="info-value bold" id="repPatientName">Rajesh Kumar Verma</span>
+            </div>
+            <div class="info-cell">
+              <span class="info-label">Sample ID / PID:</span>
+              <span class="info-value mono" id="repSampleId">MPL-2026-9042</span>
+            </div>
+            <div class="info-cell">
+              <span class="info-label">Collection Date:</span>
+              <span class="info-value" id="repCollectionDate">05-Oct-2026 09:30 AM</span>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <div class="info-cell">
+              <span class="info-label">Age / Gender:</span>
+              <span class="info-value" id="repAgeGender">45 Yrs / Male</span>
+            </div>
+            <div class="info-cell">
+              <span class="info-label">Referred By:</span>
+              <span class="info-value" id="repDoctor">Dr. S. K. Sharma (M.D., Med)</span>
+            </div>
+            <div class="info-cell">
+              <span class="info-label">Reporting Date:</span>
+              <span class="info-value" id="repReportingDate">05-Oct-2026 11:45 AM</span>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <div class="info-cell">
+              <span class="info-label">Blood Group:</span>
+              <span class="info-value bold text-red" id="repBloodGroup">B Positive (B+)</span>
+            </div>
+            <div class="info-cell">
+              <span class="info-label">Sample Type:</span>
+              <span class="info-value">EDTA Whole Blood & Serum</span>
+            </div>
+            <div class="info-cell">
+              <span class="info-label">Lab Status:</span>
+              <span class="info-value status-badge-ok">VERIFIED BY PATHOLOGIST</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Test Results Table -->
+        <main class="report-results-content">
+          <table class="report-table">
+            <thead>
+              <tr>
+                <th style="width: 38%;">TEST INVESTIGATION NAME</th>
+                <th style="width: 18%;">OBSERVED VALUE</th>
+                <th style="width: 14%;">UNIT</th>
+                <th style="width: 20%;">BIO. REF. INTERVAL</th>
+                <th style="width: 10%;">STATUS</th>
+              </tr>
+            </thead>
+            <tbody id="reportTableBody">
+              <!-- Dynamically rendered rows grouped by panels (CBC, BP, Sugar, Lipid, KFT, LFT) -->
+            </tbody>
+          </table>
+
+          <!-- Clinical Comments & Pathologist Remarks -->
+          <div class="report-remarks-section">
+            <h4 class="remarks-title">CLINICAL PATHOLOGIST IMPRESSION & REMARKS:</h4>
+            <div id="reportRemarksContent" class="remarks-body">
+              <!-- Dynamic automated impression based on test values -->
+            </div>
+          </div>
+        </main>
+
+        <!-- Report Footer with Signatures -->
+        <footer class="report-footer">
+          <div class="signature-block">
+            <div class="sig-line"></div>
+            <span class="sig-name" id="repTechName">Pooja Deshmukh, M.Sc.</span>
+            <span class="sig-title" id="repTechTitle">Senior Lab Technologist</span>
+          </div>
+
+          <div class="signature-block">
+            <div class="lab-stamp-seal">
+              <span id="repStampLabName">MEDIPATH LABS</span>
+              <small>★ VERIFIED ★</small>
+            </div>
+          </div>
+
+          <div class="signature-block">
+            <div class="sig-line"></div>
+            <span class="sig-name" id="repDoctorName">Dr. Arvind K. Sharma, M.D.</span>
+            <span class="sig-title" id="repDoctorDegree">Consultant Clinical Pathologist</span>
+            <small class="sig-reg" id="repDoctorReg">Reg. No: MCI-2009-48201</small>
+          </div>
+        </footer>
+
+        <div class="report-disclaimer">
+          **End of Laboratory Report** • This report is generated digitally and validated electronically. In case of any discrepancy or critical alert, please correlate clinically with the attending physician.
+        </div>
+      </div>
+    </div>
+  <!-- ==============================================
+       LAB PROFILE & SETTINGS MODAL
+       Allows customization of Laboratory Name, Address, Contact, Doctor & Licenses
+       ============================================== -->
+  <div id="labSettingsModal" class="report-modal-overlay">
+    <div class="report-modal-container settings-modal-box">
+      <div class="report-modal-bar">
+        <div class="modal-bar-left">
+          <span class="report-ready-badge" style="background: rgba(6,182,212,0.2); color: var(--cyan-primary);">⚙️ Laboratory Settings</span>
+          <span class="report-filename">अपनी पैथोलॉजी लैब का नाम व विवरण सेट करें</span>
+        </div>
+        <div class="modal-bar-right">
+          <button id="closeLabSettingsBtn" class="btn btn-outline btn-sm">✕ Close</button>
+        </div>
+      </div>
+
+      <div class="settings-modal-content">
+        <div class="settings-intro">
+          <h3>🏥 Pathology Laboratory Customization (लैब प्रोफाइल सेटअप)</h3>
+          <p>यहाँ आप अपनी पैथोलॉजी लैब का नाम, पता, फोन नंबर, मान्यता (Accreditation) और डॉक्टर का नाम दर्ज कर सकते हैं। यह जानकारी वेबसाइट के हेडर और <strong>प्रिंट होने वाली हर लैब रिपोर्ट</strong> पर अपने-आप दिखाई देगी।</p>
+        </div>
+
+        <form id="labSettingsForm" onsubmit="return false;">
+          <div class="form-grid-2">
+            <div class="patient-field">
+              <label for="cfgLabName">Full Laboratory Name (लैब का पूरा नाम) *</label>
+              <input type="text" id="cfgLabName" value="MEDIPATH DIAGNOSTIC RESEARCH CENTER" placeholder="उदा. श्री कृष्णा पैथोलॉजी लैब">
+            </div>
+
+            <div class="patient-field">
+              <label for="cfgShortName">Short Brand Name (वेबसाइट हेडर के लिए) *</label>
+              <input type="text" id="cfgShortName" value="MediPath Pro" placeholder="उदा. Shri Krishna Lab">
+            </div>
+          </div>
+
+          <div class="form-grid-2" style="margin-top: 0.85rem;">
+            <div class="patient-field">
+              <label for="cfgTagline">Lab Tagline / Subtitle (टैगलाइन)</label>
+              <input type="text" id="cfgTagline" value="Advanced Pathology Diagnostic & Clinical Simulation System • पैथोलॉजी प्रयोगशाला प्रणाली">
+            </div>
+
+            <div class="patient-field">
+              <label for="cfgAccreditation">Accreditation / Certification (मान्यता)</label>
+              <input type="text" id="cfgAccreditation" value="NABL ACCREDITED LAB (CERT NO. MC-4921) • ISO 15189:2022 COMPLIANT • ICMR APPROVED">
+            </div>
+          </div>
+
+          <div class="patient-field" style="margin-top: 0.85rem;">
+            <label for="cfgAddress">Full Address (लैब का पूरा पता - रिपोर्ट हेडर के लिए) *</label>
+            <input type="text" id="cfgAddress" value="Plot 42, Health City Complex, Medical Enclave, New Delhi - 110029">
+          </div>
+
+          <div class="form-grid-2" style="margin-top: 0.85rem;">
+            <div class="patient-field">
+              <label for="cfgPhone">Contact Phone / Mobile (फोन/मोबाइल)</label>
+              <input type="text" id="cfgPhone" value="+91 11 2684 9000 / +91 98765 43210">
+            </div>
+
+            <div class="patient-field">
+              <label for="cfgEmail">Email & Website (ईमेल व वेबसाइट)</label>
+              <input type="text" id="cfgEmail" value="reports@medipathlabs.org | www.medipathpro.org">
+            </div>
+          </div>
+
+          <div class="sub-section-divider" style="margin: 1.25rem 0 0.85rem;">
+            <h4>👨‍⚕️ Consultant Pathologist & Signatures (हस्ताक्षर विवरण)</h4>
+          </div>
+
+          <div class="form-grid-3">
+            <div class="patient-field">
+              <label for="cfgDoctorName">Chief Pathologist Doctor (डॉक्टर का नाम)</label>
+              <input type="text" id="cfgDoctorName" value="Dr. Arvind K. Sharma, M.D.">
+            </div>
+
+            <div class="patient-field">
+              <label for="cfgDoctorDegree">Designation / Degree (पद व डिग्री)</label>
+              <input type="text" id="cfgDoctorDegree" value="Consultant Clinical Pathologist">
+            </div>
+
+            <div class="patient-field">
+              <label for="cfgDoctorReg">Medical Reg. Number (पंजीकरण संख्या)</label>
+              <input type="text" id="cfgDoctorReg" value="Reg. No: MCI-2009-48201">
+            </div>
+          </div>
+
+          <div class="form-grid-2" style="margin-top: 0.85rem;">
+            <div class="patient-field">
+              <label for="cfgTechName">Senior Lab Technologist (लैब तकनीशियन)</label>
+              <input type="text" id="cfgTechName" value="Pooja Deshmukh, M.Sc.">
+            </div>
+
+            <div class="patient-field">
+              <label for="cfgStampText">Lab Stamp Seal Text (सील पर नाम)</label>
+              <input type="text" id="cfgStampText" value="MEDIPATH LABS">
+            </div>
+          </div>
+
+          <!-- Quick Lab Preset buttons -->
+          <div class="preset-buttons-row" style="margin-top: 1.25rem;">
+            <span class="small-text">Quick Example Names:</span>
+            <button type="button" class="btn btn-tiny btn-ghost" onclick="applyLabExample('shri_krishna')">श्री कृष्णा पैथोलॉजी लैब (जयपुर)</button>
+            <button type="button" class="btn btn-tiny btn-ghost" onclick="applyLabExample('apex_diagnostic')">Apex Diagnostic & Research (Mumbai)</button>
+            <button type="button" class="btn btn-tiny btn-ghost" onclick="applyLabExample('city_care')">City Care Clinical Laboratories (Delhi)</button>
+          </div>
+
+          <div class="settings-modal-actions">
+            <button type="button" id="saveLabSettingsBtn" class="btn btn-primary glow-button">
+              💾 Save Lab Details (लैब विवरण सेव करें)
+            </button>
+            <button type="button" id="resetLabSettingsBtn" class="btn btn-outline">
+              ↻ Reset Defaults
+            </button>
+            <button type="button" id="cancelLabSettingsBtn" class="btn btn-ghost">
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Toast Container -->
+  <div id="toastContainer" class="toast-container no-print"></div>
+
+  <!-- Main JavaScript File -->
+  <script src="app.js"></script>
+</body>
+</html>
